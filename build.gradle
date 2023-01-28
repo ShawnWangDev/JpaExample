@@ -1,0 +1,51 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.2'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'pers.wangsc'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenLocal { setUrl("file://${project.rootDir}/lib") }
+    mavenLocal()
+    maven {allowInsecureProtocol = true
+        setUrl("http://maven.aliyun.com/nexus/content/groups/public/")
+    }
+    maven {allowInsecureProtocol = true
+        url = uri("https://maven.aliyun.com/repository/public") }
+    maven {allowInsecureProtocol = true
+        url = uri("https://maven.aliyun.com/repository/google") }
+    maven {
+    allowInsecureProtocol = true
+        url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
+    maven {
+    allowInsecureProtocol = true
+        url = uri("https://maven.aliyun.com/repository/spring-plugin") }
+    maven {
+    allowInsecureProtocol = true
+        url = uri("https://maven.aliyun.com/repository/apache-snapshots") }
+    maven {
+        allowInsecureProtocol = true
+        url = uri("http://oss.jfrog.org/artifactory/oss-snapshot-local/") }
+    google()
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
